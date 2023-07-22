@@ -3,4 +3,5 @@ export interface Game {
     name: string;
     rating: number;
     background_image: string;
+    short_screenshots?: {id:number, image: string}[]
 }

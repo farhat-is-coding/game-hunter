@@ -16,9 +16,16 @@ export class HomeComponent implements OnInit {
   popularGameData: Game[] = [];
   newGameData: Game[] = [];
   upcomingGameData: Game[] = [];
-
-
+  gameModal: HTMLDialogElement | null = null;
+  game: Game = {
+    id: 0,
+    name: '',
+    rating: 0,
+    background_image: '',
+    short_screenshots: []
+  }
   async ngOnInit() {
+    this.gameModal = document.getElementById('my_modal_2') as HTMLDialogElement;
     try {
       this.getPopularGameData();
       this.getNewGameData();
@@ -37,7 +44,8 @@ export class HomeComponent implements OnInit {
         id: game['id'],
         name: game['name'],
         rating: game['rating'],
-        background_image: game['background_image']
+        background_image: game['background_image'],
+        short_screenshots: game['short_screenshots']
       };
       this.popularGameData.push(g);
     });
@@ -71,4 +79,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
+
+  onGameClicked(game: Game){
+    console.log(game);
+    this.game = game;
+    this.gameModal?.showModal();
+    
+  }
 }
