@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,15 @@ export class ApiService implements OnInit {
   upcoming_games = ''
   new_games = ''
 
-  constructor(private http: HttpClient) { 
+  searchGame = ''
+
+  constructor(private http: HttpClient, private router: Router) { 
+
+    
+    this.searchGame = this.router.url;
+    console.log(this.router);
+    
+
     this.year = this.getYear()
     this.month = this.getMonth()
     this.day = this.getDay()
@@ -39,23 +48,15 @@ export class ApiService implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.year = this.getYear()
-    // this.month = this.getMonth()
-    // this.day = this.getDay()
-
-    // this.CurrentYear = `${this.year}-${this.month}-${this.day}`
-    // this.LastYear = `${this.year - 1}-${this.month}-${this.day}`
-    // this.NextYear = `${this.year + 1}-${this.month}-${this.day}`
-
-
-    // this.popular_games = `/games?dates=${this.LastYear},${this.CurrentYear}&ordering=-rating&page_size=10`
-    // this.upcoming_games = `/games?dates=${this.CurrentYear},${this.NextYear}&ordering=-added&page_size=10`
-    // this.new_games = `/games?dates=${this.LastYear},${this.CurrentYear}&ordering=-released&page_size=10`
   }
   popularGamesURL(){
     console.log(this.base_url + this.popular_games + '&key=' + this.api_key);
     
     return this.http.get(`${this.base_url}${this.popular_games}&key=${this.api_key}`)
+  }
+
+  searchGameURL(){
+    return this.http.get(`${this.base_url}/games?search=${this.searchGame}&page_size=9&key=${this.api_key}`)
   }
 
   // popularGamesURL = () => this.http.get(`${this.base_url}${this.popular_games}&key=${this.api_key}`)

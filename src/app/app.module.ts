@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GameComponent } from './home/game/game.component';
+import { NavComponent } from './nav/nav.component';
+import { FormsModule } from '@angular/forms';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 
 @NgModule({
@@ -14,13 +17,15 @@ import { GameComponent } from './home/game/game.component';
     AppComponent,
     HomeComponent,
     NotFoundComponent,
-    GameComponent
+    GameComponent,
+    NavComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

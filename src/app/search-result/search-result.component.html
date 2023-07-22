@@ -1,0 +1,30 @@
+<dialog #gameModal id="my_modal_2" class="modal ">
+  <form #formRef method="dialog" class="modal-box">
+    <h1 class="font-bold text-5xl">{{ game.name }}</h1>
+    <h2 class="font-bold text-3xl rounded-xl bg-teal-300">{{ game.rating }}</h2>
+    <div
+      *ngFor="let image of game.short_screenshots; let i = index"
+      class="my-2"
+    >
+      <img [src]="image.image" alt="" class="object-cover" />
+    </div>
+  </form>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+
+<h1 class="text-6xl font-bold ml-3">Search Result</h1>
+<div
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 rounded-lg m-4"
+>
+  <app-game
+    *ngFor="let game of games"
+    [game]="game"
+    (click)="onGameClicked(game)"
+    [ngClass]="!!game.background_image? '': 'hidden'"
+
+    class="min-w-0 md:w-300 mx-auto overflow-hidden bg-white cursor-pointer rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+    >
+  </app-game>
+</div>

@@ -1,8 +1,8 @@
 <!-- You can open the modal using ID.showModal() method -->
-<dialog id="my_modal_2" class="modal">
-  <form method="dialog" class="modal-box">
+<dialog #gameModal id="my_modal_2" class="modal bg-gray-100">
+  <form #formRef method="dialog" class="modal-box w-full">
     <h1 class="font-bold text-5xl">{{game.name}}</h1>
-    <h2 class="font-bold text-3xl rounded-xl bg-teal-300">{{ game.rating}}</h2>
+    <h2 class="font-bold text-3xl rounded-xl bg-teal-300">{{ game.rating }}</h2>
     <div *ngFor="let image of game.short_screenshots ; let i = index"
       class="my-2"
     >
