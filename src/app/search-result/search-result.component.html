@@ -1,12 +1,15 @@
-<dialog #gameModal id="my_modal_2" class="modal ">
-  <form #formRef method="dialog" class="modal-box">
-    <h1 class="font-bold text-5xl">{{ game.name }}</h1>
-    <h2 class="font-bold text-3xl rounded-xl bg-teal-300">{{ game.rating }}</h2>
-    <div
-      *ngFor="let image of game.short_screenshots; let i = index"
-      class="my-2"
-    >
-      <img [src]="image.image" alt="" class="object-cover" />
+<dialog #gameModal id="my_modal_2" class="modal bg-gray-100">
+  <form #formRef method="dialog" class="modal-box w-full bg-gradient-to-r to-pink-300 from-purple-300">
+    <h1 class="font-bold text-5xl text-white">{{ game.name }}</h1>
+    <h2 class="font-bold text-3xl rounded-xl text-white w-max">{{ game.rating }}</h2>
+    <div class="my-2 grid grid-cols-12">
+      <img
+        *ngFor="let image of game.short_screenshots; let i = index"
+        [src]="image.image"
+        alt=""
+        class="object-cover flex-1 w-full h-full"
+        [class]="i === 0 ? 'col-span-12' : 'col-span-4'"
+      />
     </div>
   </form>
   <form method="dialog" class="modal-backdrop">
@@ -23,8 +26,9 @@
     [game]="game"
     (click)="onGameClicked(game)"
     [ngClass]="!!game.background_image? '': 'hidden'"
+    [class]="games.length? 'fade-in' : 'fade-out'"
 
-    class="min-w-0 md:w-300 mx-auto overflow-hidden bg-white cursor-pointer rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+    class="min-w-0 md:w-300 mx-auto overflow-hidden bg-gradient-to-r from-pink-300 to-purple-100 bg-white cursor-pointer rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
     >
   </app-game>
 </div>

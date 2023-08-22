@@ -1,12 +1,16 @@
 <!-- You can open the modal using ID.showModal() method -->
 <dialog #gameModal id="my_modal_2" class="modal bg-gray-100">
-  <form #formRef method="dialog" class="modal-box w-full">
-    <h1 class="font-bold text-5xl">{{game.name}}</h1>
-    <h2 class="font-bold text-3xl rounded-xl bg-teal-300">{{ game.rating }}</h2>
-    <div *ngFor="let image of game.short_screenshots ; let i = index"
-      class="my-2"
-    >
-      <img [src]="image.image" alt="" class="object-cover">
+  <form #formRef method="dialog" class="modal-box w-full bg-gradient-to-r to-pink-300 from-purple-300">
+    <h1 class="font-bold text-5xl text-white">{{ game.name }}</h1>
+    <h2 class="font-bold text-3xl rounded-xl text-white w-max">{{ game.rating }}</h2>
+    <div class="my-2 grid grid-cols-12">
+      <img
+        *ngFor="let image of game.short_screenshots; let i = index"
+        [src]="image.image"
+        alt=""
+        class="object-cover flex-1 w-full h-full"
+        [class]="i === 0 ? 'col-span-12' : 'col-span-4'"
+      />
     </div>
   </form>
   <form method="dialog" class="modal-backdrop">
@@ -14,54 +18,76 @@
   </form>
 </dialog>
 
-<h1 class="text-6xl font-bold ml-3">Popular Games</h1>
-
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 rounded-lg m-4">
-  <app-game
-    *ngFor="let game of popularGameData"
-    [game]="game"
-    (click)="onGameClicked(game)"
-    class="min-w-0 md:w-300 mx-auto overflow-hidden bg-white cursor-pointer
-     rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out 
-     transform hover:-translate-y-1 hover:scale-105"
+<div [@staggerAnimation]="popularGameData.length">
+  <h1
+    class="text-4xl font-bold ml-3 my-2 py-3 bg-gradient-to-r to-pink-300 from-purple-300 w-max rounded-2xl text-white"
+    [class]="popularGameData.length ? 'fade-in visible' : 'hidden'"
   >
-  </app-game>
+    Popular Games
+  </h1>
+
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 rounded-lg m-4"
+    [class]="popularGameData.length ? 'fade-in' : 'fade-out'"
+  >
+    <app-game
+      *ngFor="let game of popularGameData"
+      [game]="game"
+      (click)="onGameClicked(game)"
+      class="min-w-0 md:w-300 mx-auto overflow-hidden bg-gradient-to-r from-pink-300 to-purple-100 bg-white cursor-pointer rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+    >
+    </app-game>
+  </div>
+
+  <h1
+    class="text-4xl font-bold ml-3 my-2 py-3 bg-gradient-to-r to-pink-300 from-purple-300 w-max rounded-2xl text-white"
+    [class]="popularGameData.length ? 'fade-in visible' : 'hidden'"
+  >
+    Upcoming Games
+  </h1>
+
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 rounded-lg m-4"
+    [class]="popularGameData.length ? 'fade-in visible' : 'hidden'"
+  >
+    <app-game
+      *ngFor="let game of upcomingGameData"
+      [game]="game"
+      (click)="onGameClicked(game)"
+      class="min-w-0 md:w-300 mx-auto overflow-hidden bg-gradient-to-r from-pink-300 to-purple-100 bg-white cursor-pointer rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+    >
+    </app-game>
+  </div>
+
+  <h1
+    class="text-4xl font-bold ml-3 my-2 py-3 bg-gradient-to-r to-pink-300 from-purple-300 w-max rounded-2xl text-white"
+    [class]="popularGameData.length ? 'fade-in visible' : 'hidden'"
+  >
+    New Games
+  </h1>
+
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 rounded-lg m-4"
+    [class]="popularGameData.length ? 'fade-in visible' : 'hidden'"
+  >
+    <app-game
+      *ngFor="let game of newGameData"
+      [game]="game"
+      (click)="onGameClicked(game)"
+      class="min-w-0 md:w-300 mx-auto overflow-hidden bg-gradient-to-r from-pink-300 to-purple-100 bg-white cursor-pointer rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+    >
+    </app-game>
+  </div>
 </div>
 
-
-
-
-
-<h1 class="text-6xl font-bold ml-3">Upcoming Games</h1>
-
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 rounded-lg m-4">
-  <app-game
-    *ngFor="let game of upcomingGameData"
-    [game]="game"
-    (click)="onGameClicked(game)"
-
-    class="min-w-0 md:w-300 mx-auto overflow-hidden bg-white cursor-pointer
-     rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out 
-     transform hover:-translate-y-1 hover:scale-105"
-  >
-  </app-game>
-</div>
-
-
-
-
-
-<h1 class="text-6xl font-bold ml-3">New Games</h1>
-
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 rounded-lg m-4">
-  <app-game
-    *ngFor="let game of newGameData"
-    [game]="game"
-    (click)="onGameClicked(game)"
-
-    class="min-w-0 md:w-300 mx-auto overflow-hidden bg-white cursor-pointer
-     rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out 
-     transform hover:-translate-y-1 hover:scale-105"
-  >
-  </app-game>
+<div
+  *ngIf="!popularGameData.length"
+  class="min-h-screen min-w-full flex justify-center items-center -translate-y-20"
+>
+  <div class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </div>

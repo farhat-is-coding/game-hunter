@@ -1,14 +1,38 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Game } from '../model/game.model';
-
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  query,
+  stagger,
+} from '@angular/animations';
 
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('staggerAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateY(-10px)' }),
+          stagger(100, animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))),
+        ], { optional: true }),
+      ]),
+    ]),
+    trigger('fadeInWith', [
+      transition(':enter', [
+        style({ opacity: 0,  transform: 'scale(0)' }),
+        animate('300ms ease-in-out', style({ opacity: 1, transform: 'scale(1)'  })),
+      ]),
+    ]),
+    
+  ],
 })
 export class HomeComponent implements OnInit {
 
